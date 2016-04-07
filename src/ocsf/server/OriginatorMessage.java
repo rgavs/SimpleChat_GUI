@@ -8,7 +8,7 @@ package ocsf.server;
  * A message class used by the Observable layer of the OCSF in order to conserve
  * information about the originator of a message.
  *
- * @author Dr. Robert Lagani&egrave;re
+ * @author Dr. Robert Laganiegravere
  * @version July 2001
  */
 public class OriginatorMessage {

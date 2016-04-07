@@ -9,7 +9,7 @@ public class ChannelManager {
     private Map<String, Set<ConnectionToClient>> channelMap;
 
     public ChannelManager() {
-        channelMap = new HashMap<String, Set<ConnectionToClient>>();
+        channelMap = new HashMap<>();
     }
 
     public boolean channelExists(String channel) {
@@ -17,7 +17,7 @@ public class ChannelManager {
     }
 
     public void createChannel(String channel) {
-        channelMap.put(channel, new HashSet<ConnectionToClient>());
+        channelMap.put(channel, new HashSet<>());
     }
 
     public void joinChannel(String channel, ConnectionToClient client) {

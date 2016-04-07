@@ -32,6 +32,4 @@ public class whisper extends ClientCommand {
         }
 
     }
-
-
 }

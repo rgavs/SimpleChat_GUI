@@ -66,8 +66,8 @@ public class PrivateMessageHandler extends ServerNonLoginHandler {
         Thread[] clientList = getServer().getClientConnections();
         ConnectionToClient clientConnect = null;
 
-        for (int i = 0; i < clientList.length; i++) {
-            clientConnect = (ConnectionToClient) clientList[i];
+        for (Thread aClientList : clientList) {
+            clientConnect = (ConnectionToClient) aClientList;
             if ((clientConnect.getInfo("id")).equals(id)) {
                 return clientConnect;
             }

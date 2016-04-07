@@ -13,7 +13,7 @@ public class PasswordManager {
     private Map<String, String> IDPasswordMap;
 
     public PasswordManager() {
-        IDPasswordMap = new HashMap<String, String>();
+        IDPasswordMap = new HashMap<>();
     }
 
     public void addIDPasswordPair(String id, String password) throws PasswordException {

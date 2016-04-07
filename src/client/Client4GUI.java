@@ -71,7 +71,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         if (msg instanceof String)
             display((String) msg);
         else if (msg instanceof Exception)
-            display("Connection exception " + (Exception) msg);
+            display("Connection exception " + msg);
     }
 
     public void display(String message) {

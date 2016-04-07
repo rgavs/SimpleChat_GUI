@@ -189,13 +189,13 @@ public class Chat4Server extends AbstractServer {
         String name;
         String id;
         HashSet<String> blocked;
-        for (int i = 0; i < clientThreadList.length; i++) {
+        for (Thread aClientThreadList : clientThreadList) {
             try {
-                name = (String) ((ConnectionToClient) clientThreadList[i]).getInfo("channel");
-                id = (String) ((ConnectionToClient) clientThreadList[i]).getInfo("id");
-                blocked = (HashSet<String>) ((ConnectionToClient) clientThreadList[i]).getInfo("iblock");
+                name = (String) ((ConnectionToClient) aClientThreadList).getInfo("channel");
+                id = (String) ((ConnectionToClient) aClientThreadList).getInfo("id");
+                blocked = (HashSet<String>) ((ConnectionToClient) aClientThreadList).getInfo("iblock");
                 if (name.equals(channel) && !blocked.contains(sender)) {
-                    ((ConnectionToClient) clientThreadList[i]).sendToClient(id + ">" + msg);
+                    ((ConnectionToClient) aClientThreadList).sendToClient(id + ">" + msg);
                 }
             } catch (Exception ex) {
             }

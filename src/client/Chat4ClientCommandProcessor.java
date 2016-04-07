@@ -17,8 +17,8 @@ import java.io.IOException;
  * Uses reflection to create ClientCommand subclasses for each command
  *
  * @author Dr Timothy C. Lethbridge
- * @author Dr Robert Lagani&egrave;
- * @author Fran&ccedil;ois B&eacute;langer
+ * @author Dr Robert Laganiegrave
+ * @author Franccedilois Beacutelanger
  * @author Chris Nevison
  * @version March 2016
  */

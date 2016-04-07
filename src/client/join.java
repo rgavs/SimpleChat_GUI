@@ -21,6 +21,4 @@ public class join extends ClientCommand {
             getClient().clientUI().display(ex + "\nUnable to join " + getStr());
         }
     }
-
-
 }
