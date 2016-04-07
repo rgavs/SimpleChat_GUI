@@ -22,8 +22,8 @@ import java.util.HashSet;
  * a message to the instance of that subclass created by reflection.
  *
  * @author Dr Timothy C. Lethbridge
- * @author Dr Robert Laganiegravere
- * @author Franccedilois Beacutelanger
+ * @author Dr Robert Lagani&egrave;re
+ * @author Fran&ccedil;ois B&eacute;langer
  * @author Paul Holden
  * @author Chris Nevison
  * @version March 2012
@@ -36,9 +36,9 @@ public class Chat4Server extends AbstractServer {
      */
     final public static int DEFAULT_PORT = 5555;
 
-    private ChatIF myConsole;
-    private PasswordManager passwordChecker;
-    private ChannelManager myChannels;
+    ChatIF myConsole;
+    PasswordManager passwordChecker;
+    ChannelManager myChannels;
 
     //Constructors ****************************************************
 
@@ -52,6 +52,7 @@ public class Chat4Server extends AbstractServer {
         myConsole = console;
         passwordChecker = new PasswordManager();
         myChannels = new ChannelManager();
+        getChannelManager().createChannel("global");
     }
 
     public ChatIF getConsole() {
@@ -74,8 +75,8 @@ public class Chat4Server extends AbstractServer {
      * @param msg    The message received, an instance of a subclass of ServerMessageHandler
      * @param client The connection from which the message originated.
      */
-    public void handleMessageFromClient
-    (Object msg, ConnectionToClient client) {
+    public void handleMessageFromClient(Object msg, ConnectionToClient client) {
+// getConsole().display("start handleMessageFromClient");
         String handlerStr;
         String message = (String) msg;
         int indexBlank = message.indexOf(' ');
@@ -188,13 +189,13 @@ public class Chat4Server extends AbstractServer {
         String name;
         String id;
         HashSet<String> blocked;
-        for (Thread aClientThreadList : clientThreadList) {
+        for (int i = 0; i < clientThreadList.length; i++) {
             try {
-                name = (String) ((ConnectionToClient) aClientThreadList).getInfo("channel");
-                id = (String) ((ConnectionToClient) aClientThreadList).getInfo("id");
-                blocked = (HashSet<String>) ((ConnectionToClient) aClientThreadList).getInfo("iblock");
+                name = (String) ((ConnectionToClient) clientThreadList[i]).getInfo("channel");
+                id = (String) ((ConnectionToClient) clientThreadList[i]).getInfo("id");
+                blocked = (HashSet<String>) ((ConnectionToClient) clientThreadList[i]).getInfo("iblock");
                 if (name.equals(channel) && !blocked.contains(sender)) {
-                    ((ConnectionToClient) aClientThreadList).sendToClient(id + ">" + msg);
+                    ((ConnectionToClient) clientThreadList[i]).sendToClient(id + ">" + msg);
                 }
             } catch (Exception ex) {
             }

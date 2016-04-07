@@ -50,7 +50,7 @@ public class JoinChannel extends ServerNonLoginHandler {
             try {
                 getClient().sendToClient("you have created the channel " + channelName);
             } catch (IOException e) {
-                getServer().getConsole().display(e + "\nAn error has occurred when sending channel create message to client");
+                getServer().getConsole().display(e + "\nAn error has occured when sending channel create message to client");
             }
         }
     }
@@ -64,7 +64,7 @@ public class JoinChannel extends ServerNonLoginHandler {
         try {
             getClient().sendToClient("you have joined the channel " + channelName);
         } catch (IOException e) {
-            getServer().getConsole().display(e + "\nAn error has occurred when sending channel join message to client");
+            getServer().getConsole().display(e + "\nAn error has occured when sending channel join message to client");
         }
     }
 

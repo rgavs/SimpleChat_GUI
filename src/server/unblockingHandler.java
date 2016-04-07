@@ -53,9 +53,9 @@ public class unblockingHandler extends ServerNonLoginHandler {
 
     private ConnectionToClient findClient(String who) {
         Thread[] clientList = getServer().getClientConnections();
-        for (Thread aClientList : clientList) {
-            if ((((ConnectionToClient) aClientList).getInfo("id")).equals(who)) {
-                return (ConnectionToClient) aClientList;
+        for (int i = 0; i < clientList.length; i++) {
+            if ((((ConnectionToClient) clientList[i]).getInfo("id")).equals(who)) {
+                return (ConnectionToClient) clientList[i];
             }
         }
         return null;

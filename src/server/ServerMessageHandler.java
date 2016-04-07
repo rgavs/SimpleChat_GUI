@@ -19,7 +19,7 @@ public abstract class ServerMessageHandler implements Serializable {
 
     private static final long serialVersionUID = 8914728776829666970L;
     private String message;
-    private Chat4Server myServer;
+    protected Chat4Server myServer;
     private ConnectionToClient myClient;
 
     /**

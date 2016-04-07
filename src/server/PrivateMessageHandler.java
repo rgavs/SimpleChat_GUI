@@ -34,7 +34,7 @@ public class PrivateMessageHandler extends ServerNonLoginHandler {
     }
 
     /**
-     * This method send the message only to the selected client, if not bocking the sender.
+     * This method send the message only to the selected client, if not b;ocking the sender.
      * Message is also displayed on the server console.
      */
     public void handleMess() {
@@ -66,8 +66,8 @@ public class PrivateMessageHandler extends ServerNonLoginHandler {
         Thread[] clientList = getServer().getClientConnections();
         ConnectionToClient clientConnect = null;
 
-        for (Thread aClientList : clientList) {
-            clientConnect = (ConnectionToClient) aClientList;
+        for (int i = 0; i < clientList.length; i++) {
+            clientConnect = (ConnectionToClient) clientList[i];
             if ((clientConnect.getInfo("id")).equals(id)) {
                 return clientConnect;
             }

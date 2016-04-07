@@ -53,8 +53,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
 
         try {
             client = new Chat4ClientCommandProcessor(id, password, new ObservableClient(host, port), this);
+
         } catch (IOException ex) {
-            display("IOException " + ex + "when connecting, shutting down.");
+            System.out.println("IOException " + ex + "when connecting, shutting down.");
         }
         display("connected to " + host + "-" + port);
         client.OC().addObserver(this);
@@ -70,11 +71,11 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         if (msg instanceof String)
             display((String) msg);
         else if (msg instanceof Exception)
-            display("Connection exception " + msg);
+            display("Connection exception " + (Exception) msg);
     }
 
     public void display(String message) {
-        textArea.append("> " + message + newline);
+        textArea.append(message + newline);
         //Make sure the new text is visible, even if there
         //was a selection in the text area.
         textArea.setCaretPosition(textArea.getDocument().getLength());
