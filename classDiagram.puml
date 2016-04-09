@@ -1,0 +1,85 @@
+@startuml
+
+package client {
+    class Client4GUI
+    class ClientCommand
+    class list
+    class login
+    class logout
+    class quit
+    class join
+    class NotConnectedClientCommand
+    class gethost
+    class getport
+    class sethost
+    class setport
+    class whisper
+}
+
+class Client4GUI extends JPanel implements ActionListener, ChatIF, Observer{
+    __ private fields__
+    -JTextField textField
+    -JTextArea textArea
+    __public methods__
+    +display(String)
+    +update(Observable, Object)
+    +actionPerformed(ActionEvent)
+}
+
+abstract class ClientCommand{
+    -String myString
+    -Client4CommandProcessor myClient
+    #String getStr()
+    +doCommand()
+}
+
+class ObservableSWRClient extends ObservableClient{
+
+
+class ObservableClient extends Observable{
+}
+
+class NotConnectedClientCommand extends ClientCommand{
+}
+
+class list extends ClientCommand{
+    +doCommand()
+}
+
+class join extends ClientCommand{
+    +doCommand()
+}
+
+class quit extends ClientCommand{
+    +doCommand()
+}
+
+class login extends NotConnectedClientCommand{
+    +doCommand()
+}
+
+class sethost  extends NotConnectedClientCommand{
+    +doCommand()
+}
+
+class setport extends NotConnectedClientCommand{
+    +doCommand()
+}
+
+class logout extends ClientCommand{
+    +doCommand()
+}
+
+class whisper extends ClientCommand{
+    +doCommand()
+}
+
+class getport  extends ClientCommand{
+    +doCommand()
+}
+
+class gethost extends ClientCommand{
+    +doCommand()
+}
+
+@enduml

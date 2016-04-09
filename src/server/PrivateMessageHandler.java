@@ -10,7 +10,7 @@ import java.util.Set;
  * rather than broadcast it.
  */
 public class PrivateMessageHandler extends ServerNonLoginHandler {
-    private String receiveId;
+    private final String receiveId;
     private String myMessage;
 
     public PrivateMessageHandler(String str, Chat4Server server, ConnectionToClient client) {
@@ -25,11 +25,11 @@ public class PrivateMessageHandler extends ServerNonLoginHandler {
         }
     }
 
-    protected String getReceiveId() {
+    private String getReceiveId() {
         return receiveId;
     }
 
-    protected String getMyMessage() {
+    private String getMyMessage() {
         return myMessage;
     }
 

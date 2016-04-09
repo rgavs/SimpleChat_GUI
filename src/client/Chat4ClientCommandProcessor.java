@@ -25,18 +25,19 @@ import java.io.IOException;
 public class Chat4ClientCommandProcessor {
     //Instance variables **********************************************
 
-    private ObservableClient myOC;
-    String myId;
-    ChatIF myUI;
+    private final ObservableClient myOC;
+    private final String myId;
+    private final ChatIF myUI;
 
     //Constructors ****************************************************
 
     /**
      * Constructs an instance of the chat client.
      *
-     * @param host     The server to connect to.
-     * @param port     The port number to connect on.
-     * @param clientUI The interface type variable.
+     * @param id        string client's name
+     * @param password  string
+     * @param oc        ObservableClient
+     * @param UI        ChatIF
      */
 
     public Chat4ClientCommandProcessor(String id, String password, ObservableClient oc, ChatIF UI)

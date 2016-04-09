@@ -6,7 +6,7 @@ package password;
  * @author Chris Nevison
  * @version March 2012
  */
-public class PasswordException extends Exception {
+class PasswordException extends Exception {
     private static final long serialVersionUID = 603663038383031673L;
 
     public PasswordException(String issue) {

@@ -20,7 +20,7 @@ class AdaptableClient extends AbstractClient {
     /**
      * The proxy used to simulate multiple class inheritance.
      */
-    private ObservableClient client;
+    private final ObservableClient client;
 
 // CONSTRUCTORS *****************************************************
 

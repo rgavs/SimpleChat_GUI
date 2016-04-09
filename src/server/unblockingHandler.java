@@ -10,7 +10,7 @@ import java.util.HashSet;
  */
 public class unblockingHandler extends ServerNonLoginHandler {
 
-    String whoToUnblock;
+    private final String whoToUnblock;
 
     public unblockingHandler(String str, Chat4Server server, ConnectionToClient client) {
         super(str, server, client);

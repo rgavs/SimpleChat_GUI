@@ -16,7 +16,7 @@ import java.util.List;
  * when a user wishes to send a message and then wait for a reply
  * from the server.
  *
- * @author Dr Robert Lagani&egrave;re
+ * @author Dr Robert Laganiegravere
  * @version April 2002
  */
 public class ObservableSWRClient extends ObservableClient {
@@ -25,12 +25,12 @@ public class ObservableSWRClient extends ObservableClient {
     /**
      * Indicates a that the client is still waiting for a reply.
      */
-    public static final String WAITING_FOR_REPLY = "#OC:Waiting for reply.";
+    private static final String WAITING_FOR_REPLY = "#OC:Waiting for reply.";
 
     /**
      * The service instance used to simulate multiple class inheritance.
      */
-    private ArrayList expected = new ArrayList(3);
+    private final ArrayList expected = new ArrayList(3);
     private boolean cancelled = false;
     private int waitTime = 30000;
     private Exception exception;
@@ -76,10 +76,9 @@ public class ObservableSWRClient extends ObservableClient {
             notifyObservers(WAITING_FOR_REPLY);
         }
 
-        if (exception != null) {
+        if (exception != null)
             throw exception;
-        }
-
+        
         return !cancelled;
     }
 
@@ -118,7 +117,7 @@ public class ObservableSWRClient extends ObservableClient {
      * @return the object received.
      * @throws IOException if an I/O error occurs.
      */
-    public synchronized Object sendAndWaitForReply(
+    private synchronized Object sendAndWaitForReply(
             Object message, List expectedListOfObject) throws Exception {
 
         if (expectedListOfObject != null) {

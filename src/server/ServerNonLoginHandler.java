@@ -16,7 +16,7 @@ import java.io.IOException;
 public abstract class ServerNonLoginHandler extends ServerMessageHandler {
     private static final long serialVersionUID = -8974734448793542422L;
 
-    public ServerNonLoginHandler(String str, Chat4Server server, ConnectionToClient client) {
+    ServerNonLoginHandler(String str, Chat4Server server, ConnectionToClient client) {
         super(str, server, client);
     }
 
@@ -44,6 +44,6 @@ public abstract class ServerNonLoginHandler extends ServerMessageHandler {
      * implementing this method in the subclass that defines the command. This method will not be
      * called if the client is not logged in to the server.
      */
-    public abstract void handleMess();
+    protected abstract void handleMess();
 
 }

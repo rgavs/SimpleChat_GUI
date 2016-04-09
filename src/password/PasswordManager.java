@@ -10,7 +10,7 @@ import java.util.Map;
  * @version march 2012
  */
 public class PasswordManager {
-    private Map<String, String> IDPasswordMap;
+    private final Map<String, String> IDPasswordMap;
 
     public PasswordManager() {
         IDPasswordMap = new HashMap<>();

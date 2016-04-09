@@ -19,14 +19,14 @@ public class Server4Console implements ChatIF {
     /**
      * The default port to connect on.
      */
-    final public static int DEFAULT_PORT = 5555;
+    private final static int DEFAULT_PORT = 5555;
 
     //Instance variables **********************************************
 
     /**
      * The instance of the server served by this console
      */
-    private Chat4Server server;
+    private final Chat4Server server;
 
     //Constructors ****************************************************
 
@@ -35,7 +35,7 @@ public class Server4Console implements ChatIF {
      *
      * @param port The port to connect on.
      */
-    public Server4Console(int port) {
+    private Server4Console(int port) {
         server = new Chat4Server(port, this);
         try {
             server.listen();
@@ -51,7 +51,7 @@ public class Server4Console implements ChatIF {
      * This method waits for input from the console.  Once it is
      * received, it sends it to the client's message handler.
      */
-    public void accept() {
+    private void accept() {
         try {
             BufferedReader fromConsole =
                     new BufferedReader(new InputStreamReader(System.in));
@@ -83,7 +83,7 @@ public class Server4Console implements ChatIF {
     /**
      * This method is responsible for the creation of the Server UI.
      *
-     * @param args[0] The port to connect to.
+     * @param args The port to connect to; args[0].
      */
     public static void main(String[] args) {
         int port = 0;  //The port number

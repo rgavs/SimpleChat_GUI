@@ -19,45 +19,45 @@ import java.util.Observable;
  * @version August 2000
  */
 
-public class ObservableServer extends Observable {
+class ObservableServer extends Observable {
     // Class variables ************************************************
 
     /**
      * The string sent to the observers when a client has connected.
      */
-    public static final String CLIENT_CONNECTED = "#OS:Client connected.";
+    static final String CLIENT_CONNECTED = "#OS:Client connected.";
 
     /**
      * The string sent to the observers when a client has disconnected.
      */
-    public static final String CLIENT_DISCONNECTED = "#OS:Client disconnected.";
+    static final String CLIENT_DISCONNECTED = "#OS:Client disconnected.";
 
     /**
      * The string sent to the observers when an exception occurred with a client.
      * The error message of that exception will be appended to this string.
      */
-    public static final String CLIENT_EXCEPTION = "#OS:Client exception.";
+    static final String CLIENT_EXCEPTION = "#OS:Client exception.";
 
     /**
      * The string sent to the observers when a listening exception occurred.
      * The error message of that exception will be appended to this string.
      */
-    public static final String LISTENING_EXCEPTION = "#OS:Listening exception.";
+    static final String LISTENING_EXCEPTION = "#OS:Listening exception.";
 
     /**
      * The string sent to the observers when the server has closed.
      */
-    public static final String SERVER_CLOSED = "#OS:Server closed.";
+    static final String SERVER_CLOSED = "#OS:Server closed.";
 
     /**
      * The string sent to the observers when the server has started.
      */
-    public static final String SERVER_STARTED = "#OS:Server started.";
+    static final String SERVER_STARTED = "#OS:Server started.";
 
     /**
      * The string sent to the observers when the server has stopped.
      */
-    public static final String SERVER_STOPPED = "#OS:Server stopped.";
+    static final String SERVER_STOPPED = "#OS:Server stopped.";
 
 
     //Instance variables **********************************************
@@ -65,7 +65,7 @@ public class ObservableServer extends Observable {
     /**
      * The service used to simulate multiple class inheritance.
      */
-    private AdaptableServer service;
+    private final AdaptableServer service;
 
 
     //Constructor *****************************************************
@@ -75,7 +75,7 @@ public class ObservableServer extends Observable {
      *
      * @param port the port on which to listen.
      */
-    public ObservableServer(int port) {
+    ObservableServer(int port) {
         service = new AdaptableServer(port, this);
     }
 
@@ -91,7 +91,7 @@ public class ObservableServer extends Observable {
     /**
      * Causes the server to stop accepting new connections.
      */
-    final public void stopListening() {
+    private void stopListening() {
         service.stopListening();
     }
 
@@ -188,7 +188,7 @@ public class ObservableServer extends Observable {
      *
      * @param client the connection connected to the client.
      */
-    protected synchronized void clientConnected(ConnectionToClient client) {
+    synchronized void clientConnected(ConnectionToClient client) {
         setChanged();
         notifyObservers(CLIENT_CONNECTED);
     }
@@ -199,7 +199,7 @@ public class ObservableServer extends Observable {
      *
      * @param client the connection with the client.
      */
-    protected synchronized void clientDisconnected(ConnectionToClient client) {
+    synchronized void clientDisconnected(ConnectionToClient client) {
         setChanged();
         notifyObservers(CLIENT_DISCONNECTED);
     }
@@ -214,8 +214,8 @@ public class ObservableServer extends Observable {
      * @param client    the client that raised the exception.
      * @param exception the exception raised.
      */
-    protected synchronized void clientException(ConnectionToClient client,
-                                                Throwable exception) {
+    synchronized void clientException(ConnectionToClient client,
+                                      Throwable exception) {
         setChanged();
         notifyObservers(CLIENT_EXCEPTION);
         try {
@@ -233,7 +233,7 @@ public class ObservableServer extends Observable {
      *
      * @param exception the exception raised.
      */
-    protected synchronized void listeningException(Throwable exception) {
+    synchronized void listeningException(Throwable exception) {
         setChanged();
         notifyObservers(LISTENING_EXCEPTION);
         stopListening();
@@ -244,7 +244,7 @@ public class ObservableServer extends Observable {
      * connections for any reason.  This method may be overridden by
      * subclasses.
      */
-    synchronized protected void serverStopped() {
+    synchronized void serverStopped() {
         setChanged();
         notifyObservers(SERVER_STOPPED);
     }
@@ -253,7 +253,7 @@ public class ObservableServer extends Observable {
      * This method is called when the server is closed.
      * This method may be overridden by subclasses.
      */
-    synchronized protected void serverClosed() {
+    synchronized void serverClosed() {
         setChanged();
         notifyObservers(SERVER_CLOSED);
     }
@@ -262,14 +262,14 @@ public class ObservableServer extends Observable {
      * This method is called when the server starts listening for
      * connections. The method may be overridden by subclasses.
      */
-    protected synchronized void serverStarted() {
+    synchronized void serverStarted() {
         setChanged();
         notifyObservers(SERVER_STARTED);
     }
 
     /**
      * This method is used to handle messages coming from the client.
-     * Observers are notfied by receiveing the transmitted message.
+     * Observers are notified by receiving the transmitted message.
      * Note that, in this implementation, the information concerning
      * the client that sent the message is lost.
      * It can be overridden, but is still expected to call notifyObservers().
@@ -278,7 +278,7 @@ public class ObservableServer extends Observable {
      * @param client  The connection to the client.
      * @see ocsf.server.ObservableOriginatorServer
      */
-    protected synchronized void handleMessageFromClient
+    synchronized void handleMessageFromClient
     (Object message, ConnectionToClient client) {
         setChanged();
         notifyObservers(message);

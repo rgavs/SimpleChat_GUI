@@ -14,10 +14,10 @@ import server.Chat4Server;
  * @version February 2012
  */
 public abstract class ServerCommand {
-    private String myString;
-    private Chat4Server myServer;
+    private final String myString;
+    private final Chat4Server myServer;
 
-    public ServerCommand(String str, Chat4Server server) {
+    ServerCommand(String str, Chat4Server server) {
         myString = str;
         myServer = server;
     }
@@ -27,7 +27,7 @@ public abstract class ServerCommand {
      *
      * @return the server
      */
-    protected Chat4Server getServer() {
+    Chat4Server getServer() {
         return myServer;
     }
 
@@ -38,7 +38,7 @@ public abstract class ServerCommand {
      *
      * @return message String
      */
-    protected String getStr() {
+    String getStr() {
         return myString;
     }
 

@@ -11,11 +11,11 @@ package client;
  * @author Chris Nevison
  * @version February 2012
  */
-public abstract class ClientCommand {
-    private String myString;
-    private Chat4ClientCommandProcessor myClient;
+abstract class ClientCommand {
+    private final String myString;
+    private final Chat4ClientCommandProcessor myClient;
 
-    public ClientCommand(String str, Chat4ClientCommandProcessor client) {
+    ClientCommand(String str, Chat4ClientCommandProcessor client) {
         myString = str;
         myClient = client;
     }
@@ -25,7 +25,7 @@ public abstract class ClientCommand {
      *
      * @return the client
      */
-    protected Chat4ClientCommandProcessor getClient() {
+    Chat4ClientCommandProcessor getClient() {
         return myClient;
     }
 
@@ -34,7 +34,7 @@ public abstract class ClientCommand {
      *
      * @return command String
      */
-    protected String getStr() {
+    String getStr() {
         return myString;
     }
 

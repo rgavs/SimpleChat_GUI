@@ -66,7 +66,7 @@ public class ConnectionToClient extends Thread {
     /**
      * A reference to the Server that created this instance.
      */
-    private AbstractServer server;
+    private final AbstractServer server;
 
     /**
      * Sockets are used in the operating system as channels
@@ -99,7 +99,7 @@ public class ConnectionToClient extends Thread {
      * information about each client. Used by the setInfo and getInfo
      * methods.
      */
-    private HashMap<String, Object> savedInfo = new HashMap<>(10);
+    private final HashMap<String, Object> savedInfo = new HashMap<>(10);
 
 // CONSTRUCTORS *****************************************************
 
@@ -280,7 +280,7 @@ public class ConnectionToClient extends Thread {
      *
      * @param message the message sent.
      */
-    protected boolean handleMessageFromClient(Object message) {
+    private boolean handleMessageFromClient(Object message) {
         return true;
     }
 
@@ -292,7 +292,7 @@ public class ConnectionToClient extends Thread {
      * @throws IOException if an I/O error occur when closing the
      *                     connection.
      */
-    final private void closeAll() throws IOException {
+    private void closeAll() throws IOException {
         // This method is final since version 2.2
 
         try {

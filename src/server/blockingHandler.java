@@ -12,7 +12,7 @@ import java.util.HashSet;
 public class blockingHandler extends ServerNonLoginHandler {
 
     private static final long serialVersionUID = 1717928825890682607L;
-    protected String whoToBlock;
+    private final String whoToBlock;
 
     public blockingHandler(String str, Chat4Server server, ConnectionToClient client) {
         super(str, server, client);

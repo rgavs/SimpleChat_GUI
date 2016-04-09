@@ -22,8 +22,8 @@ import java.util.HashSet;
  * a message to the instance of that subclass created by reflection.
  *
  * @author Dr Timothy C. Lethbridge
- * @author Dr Robert Lagani&egrave;re
- * @author Fran&ccedil;ois B&eacute;langer
+ * @author Dr Robert Laganiegravere
+ * @author Franccedilois Beacutelanger
  * @author Paul Holden
  * @author Chris Nevison
  * @version March 2012
@@ -36,9 +36,9 @@ public class Chat4Server extends AbstractServer {
      */
     final public static int DEFAULT_PORT = 5555;
 
-    ChatIF myConsole;
-    PasswordManager passwordChecker;
-    ChannelManager myChannels;
+    private final ChatIF myConsole;
+    private final PasswordManager passwordChecker;
+    private final ChannelManager myChannels;
 
     //Constructors ****************************************************
 
@@ -103,7 +103,7 @@ public class Chat4Server extends AbstractServer {
         }
     }
 
-    public void handleMessageFromServerUI(String message) {
+    void handleMessageFromServerUI(String message) {
         if (message.charAt(0) != '#') {
             handleUIString(message);
         } else {
@@ -184,7 +184,7 @@ public class Chat4Server extends AbstractServer {
     }
 
     //this sends to all clients in a given channel
-    public void sendToAllClients(String msg, String channel, String sender) {
+    void sendToAllClients(String msg, String channel, String sender) {
         Thread[] clientThreadList = getClientConnections();
         String name;
         String id;
@@ -201,7 +201,5 @@ public class Chat4Server extends AbstractServer {
             }
         }
     }
-
-
 }
 

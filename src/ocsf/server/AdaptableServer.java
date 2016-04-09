@@ -20,15 +20,15 @@ class AdaptableServer extends AbstractServer {
     /**
      * The adapter used to simulate multiple class inheritance.
      */
-    private ObservableServer server;
+    private final ObservableServer server;
 
 // CONSTRUCTORS *****************************************************
 
     /**
      * Constructs the server adapter.
      *
-     * @param host the server's host name.
      * @param port the port number.
+     * @param server the server's host name.
      */
     public AdaptableServer(int port, ObservableServer server) {
         super(port);

@@ -47,6 +47,6 @@ public abstract class AbstractConnectionFactory {
      * @param server       a reference to the server that created this instance.
      * @throws IOException if an I/O error occur when creating the connection.
      */
-    protected abstract ConnectionToClient createConnection(ThreadGroup group,
-                                                           Socket clientSocket, AbstractServer server) throws IOException;
+    protected abstract void createConnection(ThreadGroup group,
+                                             Socket clientSocket, AbstractServer server) throws IOException;
 }

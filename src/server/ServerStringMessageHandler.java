@@ -17,7 +17,7 @@ public class ServerStringMessageHandler extends ServerNonLoginHandler {
      * sent to all clients in the channel who are not blocking the user
      */
     public void handleMess() {
-        getServer().getConsole().display((String) getClient().getInfo("id") + "> " + getMessage());
+        getServer().getConsole().display(getClient().getInfo("id") + "> " + getMessage());
         getServer().sendToAllClients(getMessage(), (String) getClient().getInfo("channel"), (String) getClient().getInfo("id"));
     }
 

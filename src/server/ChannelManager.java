@@ -5,22 +5,22 @@ import ocsf.server.ConnectionToClient;
 import java.util.*;
 
 
-public class ChannelManager {
-    private Map<String, Set<ConnectionToClient>> channelMap;
+class ChannelManager {
+    private final Map<String, Set<ConnectionToClient>> channelMap;
 
-    public ChannelManager() {
+    ChannelManager() {
         channelMap = new HashMap<>();
     }
 
-    public boolean channelExists(String channel) {
+    boolean channelExists(String channel) {
         return channelMap.containsKey(channel);
     }
 
-    public void createChannel(String channel) {
+    void createChannel(String channel) {
         channelMap.put(channel, new HashSet<>());
     }
 
-    public void joinChannel(String channel, ConnectionToClient client) {
+    void joinChannel(String channel, ConnectionToClient client) {
         if (channelMap.containsKey(channel)) {
             channelMap.get(channel).add(client);
         } else {
@@ -28,7 +28,7 @@ public class ChannelManager {
         }
     }
 
-    public void removeFromChannel(String channel, ConnectionToClient client) {
+    void removeFromChannel(String channel, ConnectionToClient client) {
         if (channelMap.containsKey(channel)) {
             channelMap.get(channel).remove(client);
         } else {
@@ -36,21 +36,20 @@ public class ChannelManager {
         }
     }
 
-    public boolean isEmptyChannel(String channel) {
+    boolean isEmptyChannel(String channel) {
         return channelMap.get(channel).isEmpty();
     }
 
-    public void removeChannel(String channel) {
+    void removeChannel(String channel) {
         channelMap.remove(channel);
     }
 
-    public Set<ConnectionToClient> getChannelClients(String channel) {
+    Set<ConnectionToClient> getChannelClients(String channel) {
         return channelMap.get(channel);
     }
 
-    public Set<String> getChannelNames() {
+    Set<String> getChannelNames() {
         return channelMap.keySet();
     }
-
 }
 

@@ -15,12 +15,12 @@ import java.io.Serializable;
  * @version February 2012
  */
 
-public abstract class ServerMessageHandler implements Serializable {
+abstract class ServerMessageHandler implements Serializable {
 
     private static final long serialVersionUID = 8914728776829666970L;
-    private String message;
-    protected Chat4Server myServer;
-    private ConnectionToClient myClient;
+    private final String message;
+    private final Chat4Server myServer;
+    private final ConnectionToClient myClient;
 
     /**
      * Creates the message handler
@@ -29,7 +29,7 @@ public abstract class ServerMessageHandler implements Serializable {
      * @param server The server processing this handler
      * @param client The Clientconnectionestablished for the client sending this message
      */
-    public ServerMessageHandler(String msg, Chat4Server server, ConnectionToClient client) {
+    ServerMessageHandler(String msg, Chat4Server server, ConnectionToClient client) {
         message = msg;
         myServer = server;
         myClient = client;
@@ -40,7 +40,7 @@ public abstract class ServerMessageHandler implements Serializable {
      *
      * @return the ConnectionToClient for this client
      */
-    protected ConnectionToClient getClient() {
+    ConnectionToClient getClient() {
         return myClient;
     }
 
@@ -49,11 +49,11 @@ public abstract class ServerMessageHandler implements Serializable {
      *
      * @return the ConnectionToClient for this client
      */
-    protected Chat4Server getServer() {
+    Chat4Server getServer() {
         return myServer;
     }
 
-    protected String getMessage() {
+    String getMessage() {
         return message;
     }
 

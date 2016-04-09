@@ -8,8 +8,8 @@ package client;
  * @author Chris Nevison
  * @version February 2012
  */
-public abstract class NotConnectedClientCommand extends ClientCommand {
-    public NotConnectedClientCommand(String str, Chat4ClientCommandProcessor client) {
+abstract class NotConnectedClientCommand extends ClientCommand {
+    NotConnectedClientCommand(String str, Chat4ClientCommandProcessor client) {
         super(str, client);
     }
 
@@ -32,6 +32,5 @@ public abstract class NotConnectedClientCommand extends ClientCommand {
      * implementing this method in the subclass that defines the command. This method will not be called
      * if the client is already connected to a server.
      */
-    public abstract void doCmd();
-
+    protected abstract void doCmd();
 }

@@ -24,19 +24,19 @@ public class ObservableClient extends Observable {
     /**
      * Indicates a close of the connection to server.
      */
-    public static final String CONNECTION_CLOSED = "#OC:Connection closed.";
+    static final String CONNECTION_CLOSED = "#OC:Connection closed.";
 
     /**
      * Indicates establishment of a connection to server.
      */
-    public static final String CONNECTION_ESTABLISHED = "#OC:Connection established.";
+    static final String CONNECTION_ESTABLISHED = "#OC:Connection established.";
 
     //Instance variables **********************************************
 
     /**
      * The service instance used to simulate multiple class inheritance.
      */
-    private AdaptableClient service;
+    private final AdaptableClient service;
 
     //Constructor *****************************************************
 
@@ -127,7 +127,7 @@ public class ObservableClient extends Observable {
      *
      * @param message The message received from the client.
      */
-    protected void handleMessageFromServer(Object message) {
+    void handleMessageFromServer(Object message) {
         setChanged();
         notifyObservers(message);
     }
@@ -135,7 +135,7 @@ public class ObservableClient extends Observable {
     /**
      * Hook method called after the connection has been closed.
      */
-    protected void connectionClosed() {
+    void connectionClosed() {
         setChanged();
         notifyObservers(CONNECTION_CLOSED);
     }
@@ -146,7 +146,7 @@ public class ObservableClient extends Observable {
      *
      * @param exception the exception raised.
      */
-    protected void connectionException(Exception exception) {
+    void connectionException(Exception exception) {
         setChanged();
         notifyObservers(exception);
     }
@@ -154,7 +154,7 @@ public class ObservableClient extends Observable {
     /**
      * Hook method called after a connection has been established.
      */
-    protected void connectionEstablished() {
+    void connectionEstablished() {
         setChanged();
         notifyObservers(CONNECTION_ESTABLISHED);
     }

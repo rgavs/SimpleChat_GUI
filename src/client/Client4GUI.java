@@ -15,21 +15,22 @@ import java.util.Observer;
 
 public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observer {
 
-    protected JTextField textField;
-    protected JTextArea textArea;
+    private final JTextField textField;
+    private final JTextArea textArea;
+    private JButton editChannel;
     private final static String newline = "\n";
 
     /**
      * The default port to connect on.
      */
-    final public static int DEFAULT_PORT = 5555;
+    private final static int DEFAULT_PORT = 5555;
 
     /**
      * The instance of the client created by this ClientGUI.
      */
-    Chat4ClientCommandProcessor client;
+    private Chat4ClientCommandProcessor client;
 
-    public Client4GUI(String host, int port, String id, String password) {
+    private Client4GUI(String host, int port, String id, String password) {
         super(new GridBagLayout());
 
         textField = new JTextField(20);
@@ -38,6 +39,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
+        
+        editChannel = new JButton();
+        add(editChannel);
 
         //Add Components to this panel.
         GridBagConstraints c = new GridBagConstraints();
@@ -124,7 +128,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         } catch (ArrayIndexOutOfBoundsException e) {
             hostStr = "localhost";
         }
-
+        
         try {
             portStr = args[3];
         } catch (ArrayIndexOutOfBoundsException e) {

@@ -11,16 +11,16 @@ package ocsf.server;
  * @author Dr. Robert Laganiegravere
  * @version July 2001
  */
-public class OriginatorMessage {
+class OriginatorMessage {
     /**
      * The connection that originated the message
      */
-    private ConnectionToClient originator;
+    private final ConnectionToClient originator;
 
     /**
      * The message.
      */
-    private Object message;
+    private final Object message;
 
 // Constructor ***************************************************************
 

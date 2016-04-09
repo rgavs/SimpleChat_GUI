@@ -60,7 +60,7 @@ import java.net.SocketException;
  * @author Paul Holden
  * @version December 2003 (2.31)
  */
-public abstract class AbstractClient implements Runnable {
+abstract class AbstractClient implements Runnable {
 
 // INSTANCE VARIABLES ***********************************************
 
@@ -112,7 +112,7 @@ public abstract class AbstractClient implements Runnable {
      * @param host the server's host name.
      * @param port the port number.
      */
-    public AbstractClient(String host, int port) {
+    AbstractClient(String host, int port) {
         // Initialize variables
         this.host = host;
         this.port = port;
@@ -303,7 +303,7 @@ public abstract class AbstractClient implements Runnable {
      * such as cleaning up and terminating, or attempting to
      * reconnect.
      */
-    protected void connectionClosed() {
+    void connectionClosed() {
     }
 
     /**
@@ -317,7 +317,7 @@ public abstract class AbstractClient implements Runnable {
      *
      * @param exception the exception raised.
      */
-    protected void connectionException(Exception exception) {
+    void connectionException(Exception exception) {
     }
 
     /**
@@ -325,7 +325,7 @@ public abstract class AbstractClient implements Runnable {
      * The default implementation does nothing.
      * It may be overridden by subclasses to do anything they wish.
      */
-    protected void connectionEstablished() {
+    void connectionEstablished() {
     }
 
     /**
@@ -345,7 +345,7 @@ public abstract class AbstractClient implements Runnable {
      *
      * @throws IOException if an I/O error occurs when closing.
      */
-    final private void closeAll() throws IOException {
+    private void closeAll() throws IOException {
         // This method is final since version 2.2
 
         try {
