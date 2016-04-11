@@ -39,7 +39,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        
+
         editChannel = new JButton();
         add(editChannel);
 
@@ -128,7 +128,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         } catch (ArrayIndexOutOfBoundsException e) {
             hostStr = "localhost";
         }
-        
+
         try {
             portStr = args[3];
         } catch (ArrayIndexOutOfBoundsException e) {

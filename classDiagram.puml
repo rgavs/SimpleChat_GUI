@@ -1,85 +1,78 @@
 @startuml
-
-package client {
-    class Client4GUI
-    class ClientCommand
-    class list
-    class login
-    class logout
-    class quit
-    class join
-    class NotConnectedClientCommand
-    class gethost
-    class getport
-    class sethost
-    class setport
-    class whisper
+namespace client {
+    class Client4GUI implements common.ChatIF{
+        __ private fields__
+        -JTextField textField
+        -JTextArea textArea
+        __public methods__
+        +display(String)
+        +update(Observable, Object)
+        +actionPerformed(ActionEvent)
+    }
+    abstract class ClientCommand {
+        -String myString
+        -Client4CommandProcessor myClient
+        #String getStr()
+        +doCommand()
+    }
+    abstract class NotConnectedClientCommand --|> ClientCommand
+    class list --|> ClientCommand
+    class logout -left-|> ClientCommand
+    class quit -up-|> ClientCommand
+    class whisper -up-|> ClientCommand
+    class join -right-|> ClientCommand
+    class getport --|> ClientCommand
+    class gethost --|> ClientCommand
+    class sethost --|> NotConnectedClientCommand
+    class setport --|> NotConnectedClientCommand
+    class login -up-|> NotConnectedClientCommand
+}
+namespace common{
+    interface ChatIF
+}
+namespace ocsf{
+    package ocsf.client{
+        class ObservableClient <|-up- ObservableSWRClient
+    }
+    package ocsf.server{
+        abstract class AbstractServer
+        class AdaptableServer --|> AbstractServer
+        class ObservableServer
+        class ObservableOriginatorServer --|> ObservableServer
+    }
+}
+namespace server{
+    namespace command{
+        abstract class ServerCommand
+        class close -left-|> ServerCommand
+        class getport -up-|> ServerCommand
+        class quit --|> ServerCommand
+        class setport -up-|> ServerCommand
+        class start -|> ServerCommand
+        class stop -down-|> ServerCommand
+    }    
+    class Server4Console
+   ' class ChannelManager
+    class blockingHandler --|> ServerNonLoginHandler
+    class Chat4Server ----|> ocsf.server.AbstractServer
+    class JoinChannel -up-|> ServerNonLoginHandler
+    class ListChannelHandler -|> ServerNonLoginHandler
+    class PrivateMessageHandler -left-|> ServerNonLoginHandler
+    class ServerLoginHandler -|> ServerMessageHandler
+    class ServerMessageHandler
+    class ServerNonLoginHandler --|> ServerMessageHandler
+    class ServerStringMessageHandler --|> ServerNonLoginHandler
+    class unblockingHandler --|> ServerNonLoginHandler
+    class UserListChannelHandler -up-|> ServerNonLoginHandler
 }
 
-class Client4GUI extends JPanel implements ActionListener, ChatIF, Observer{
-    __ private fields__
-    -JTextField textField
-    -JTextArea textArea
-    __public methods__
-    +display(String)
-    +update(Observable, Object)
-    +actionPerformed(ActionEvent)
-}
+class server.Server4Console .down....|> common.ChatIF 
 
-abstract class ClientCommand{
-    -String myString
-    -Client4CommandProcessor myClient
-    #String getStr()
-    +doCommand()
-}
+class client.Client4GUI -up-|> JPanel
+class client.Client4GUI .up.|> ActionListener
+class client.Client4GUI .up.|> Observer
 
-class ObservableSWRClient extends ObservableClient{
-
-
-class ObservableClient extends Observable{
-}
-
-class NotConnectedClientCommand extends ClientCommand{
-}
-
-class list extends ClientCommand{
-    +doCommand()
-}
-
-class join extends ClientCommand{
-    +doCommand()
-}
-
-class quit extends ClientCommand{
-    +doCommand()
-}
-
-class login extends NotConnectedClientCommand{
-    +doCommand()
-}
-
-class sethost  extends NotConnectedClientCommand{
-    +doCommand()
-}
-
-class setport extends NotConnectedClientCommand{
-    +doCommand()
-}
-
-class logout extends ClientCommand{
-    +doCommand()
-}
-
-class whisper extends ClientCommand{
-    +doCommand()
-}
-
-class getport  extends ClientCommand{
-    +doCommand()
-}
-
-class gethost extends ClientCommand{
-    +doCommand()
-}
-
+class ObservableClient -|> Observable
+class ObservableServer -|> Observable
+class Observer implements Observable
 @enduml
