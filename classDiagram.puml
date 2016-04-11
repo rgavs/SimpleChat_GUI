@@ -24,21 +24,22 @@ namespace client {
     class getport --|> ClientCommand
     class gethost --|> ClientCommand
     class sethost --|> NotConnectedClientCommand
-    class setport --|> NotConnectedClientCommand
+    class setport -down-|> NotConnectedClientCommand
     class login -up-|> NotConnectedClientCommand
 }
 namespace common{
     interface ChatIF
 }
 namespace ocsf{
-    package ocsf.client{
-        class ObservableClient <|-up- ObservableSWRClient
-    }
-    package ocsf.server{
-        abstract class AbstractServer
-        class AdaptableServer --|> AbstractServer
+    namespace ocsf.server{
+        class AdaptableServer -up-|> AbstractServer
+        class ObservableOriginatorServer -up-|> ObservableServer
         class ObservableServer
-        class ObservableOriginatorServer --|> ObservableServer
+        abstract class AbstractServer
+    }
+    namespace ocsf.client{
+        class ObservableClient
+        class ObservableSWRClient -up-|> ObservableClient
     }
 }
 namespace server{
@@ -54,11 +55,11 @@ namespace server{
     class Server4Console
    ' class ChannelManager
     class blockingHandler --|> ServerNonLoginHandler
-    class Chat4Server ----|> ocsf.server.AbstractServer
+    class Chat4Server -right|> ocsf.server.AbstractServer
     class JoinChannel -up-|> ServerNonLoginHandler
     class ListChannelHandler -|> ServerNonLoginHandler
     class PrivateMessageHandler -left-|> ServerNonLoginHandler
-    class ServerLoginHandler -|> ServerMessageHandler
+    class ServerLoginHandler -down-|> ServerMessageHandler
     class ServerMessageHandler
     class ServerNonLoginHandler --|> ServerMessageHandler
     class ServerStringMessageHandler --|> ServerNonLoginHandler
@@ -68,11 +69,11 @@ namespace server{
 
 class server.Server4Console .down....|> common.ChatIF 
 
-class client.Client4GUI -up-|> JPanel
-class client.Client4GUI .up.|> ActionListener
-class client.Client4GUI .up.|> Observer
+class client.Client4GUI -up|> JPanel
+class client.Client4GUI .up|> ActionListener
+class client.Client4GUI .up|> Observer
 
-class ObservableClient -|> Observable
-class ObservableServer -|> Observable
-class Observer implements Observable
+class ocsf.client.ObservableClient -up|> Observable
+class ocsf.server.ObservableServer -up|> Observable
+class Observer ..|> Observable
 @enduml
