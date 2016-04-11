@@ -44,7 +44,6 @@ public class Server4Console implements ChatIF {
         }
     }
 
-
     //Instance methods ************************************************
 
     /**
@@ -76,7 +75,6 @@ public class Server4Console implements ChatIF {
     public void display(String message) {
         System.out.println(message);
     }
-
 
     //Class methods ***************************************************
 

@@ -25,7 +25,6 @@ public class ServerLoginHandler extends ServerMessageHandler {
      * client and no other action is taken.
      */
     public void handleMessage() {
-// myServer.getConsole().display("start handleMessage in ServerLoginhandler");
         if (getClient().getInfo("id") != null) {
             try {
                 getClient().sendToClient(getMessage() + " is already logged on. \nNo new connection made.");
@@ -35,23 +34,18 @@ public class ServerLoginHandler extends ServerMessageHandler {
         } else {
             try {
                 String[] idPassword = getMessage().split(" ");
-//  myServer.getConsole().display("try split id-password.length: " + idPassword.length);
                 if (idPassword.length != 2) {
                     getClient().sendToClient("Invalid input, sorry.  Please log in with valid input.");
                     getClient().close();
                 } else if (getServer().getPasswordManager().validID(idPassword[0])) {
-// myServer.getConsole().display("acount " + idPassword[0] + " " + idPassword[1] + " exists");
                     if (getServer().getPasswordManager().validatePassword(idPassword[0], idPassword[1])) {
                         setup(idPassword[0]);
                     } else {
                         getClient().sendToClient("Invalid password.  Please try to login again.");
                         getClient().close();
                     }
-                } else // not logged in, add id-password pair
-                {
-// myServer.getConsole().display("acount " + idPassword[0] + " " + idPassword[1] + " creation");
+                } else { // not logged in, add id-password pair
                     getServer().getPasswordManager().addIDPasswordPair(idPassword[0], idPassword[1]);
-// myServer.getConsole().display("id password pair added");
                     getClient().sendToClient("Account successfully created, congratulations!\n");
                     setup(idPassword[0]);
                 }
@@ -70,5 +64,4 @@ public class ServerLoginHandler extends ServerMessageHandler {
         getServer().getConsole().display(id + " has logged on");
         getServer().sendToAllClients("SERVER MSG> " + id + " has joined");
     }
-
 }
