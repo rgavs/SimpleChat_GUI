@@ -20,7 +20,7 @@ import java.net.SocketException;
  * <p>
  * Method <code> handleMessageFromServer </code> must be defined by
  * a concrete subclass. Several other hook methods may also be
- * overriden.<p>
+ * overridden.<p>
  * <p>
  * Several public service methods are provided to
  * application that use this framework.<p>
@@ -250,9 +250,8 @@ abstract class AbstractClient implements Runnable {
         // The message from the server
         Object msg;
 
-        // Loop waiting for data
-
         try {
+            // Loop waiting for data
             while (!readyToStop) {
                 // Get data from Server and send it to the handler
                 // The thread waits indefinitely at the following
@@ -267,13 +266,9 @@ abstract class AbstractClient implements Runnable {
                     if (!readyToStop) {  // Added in version 2.2
                         handleMessageFromServer(msg);
                     }
-
                 } catch (ClassNotFoundException ex) { // when an unknown class is received
-
                     connectionException(ex);
-
                 } catch (RuntimeException ex) { // thrown by handleMessageFromServer
-
                     connectionException(ex);
                 }
             }
@@ -283,12 +278,10 @@ abstract class AbstractClient implements Runnable {
                     closeAll();
                 } catch (Exception ex) {
                 }
-
                 clientReader = null;
                 connectionException(exception);
             }
         } finally {
-
             clientReader = null;
             connectionClosed();   // moved here in version 2.31
         }

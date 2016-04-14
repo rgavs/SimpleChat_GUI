@@ -9,15 +9,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.*;
 import java.util.Observable;
 import java.util.Observer;
+
+import static java.awt.Font.*;
 
 public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observer {
 
     private final JTextField textField;
     private final JTextArea textArea;
-    private JButton editChannel;
+    private final JButton editChannel;
     private final static String newline = "\n";
 
     /**
@@ -33,19 +35,33 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     private Client4GUI(String host, int port, String id, String password) {
         super(new GridBagLayout());
 
+        // initialize text box              @author Ryan
         textField = new JTextField(20);
-        textField.addActionListener(this);
-
+        // initialize chat text area
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
+        // initialize channel button
+        editChannel = new JButton();
+
+        try { // some customization
+            Font roboto = Font.createFont(TRUETYPE_FONT, (new FileInputStream("src/res/Roboto-Regular.ttf"))).deriveFont(12.0f);
+            textField.setFont(roboto);
+            textArea.setFont(roboto);
+            System.out.printf("Font is: "+roboto.getFamily()+" and size is "+ String.valueOf(roboto.getSize()));
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         JScrollPane scrollPane = new JScrollPane(textArea);
 
-        editChannel = new JButton();
-        add(editChannel);
-
-        //Add Components to this panel.
+        // Add Components to panel.
+        editChannel.addActionListener(this);
+        textField.addActionListener(this);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
+        add(editChannel);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         add(textField, c);
@@ -57,7 +73,6 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
 
         try {
             client = new Chat4ClientCommandProcessor(id, password, new ObservableClient(host, port), this);
-
         } catch (IOException ex) {
             System.out.println("IOException " + ex + "when connecting, shutting down.");
         }
@@ -66,6 +81,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     }
 
     public void actionPerformed(ActionEvent evt) {
+        System.out.printf("Action performed. Command is: "+evt.getActionCommand());
         String message = textField.getText();
         client.handleMessageFromClientUI(message);
         textField.setText("");
@@ -143,11 +159,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
 
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI(host, port, id, password);
-            }
-        });
+        javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI(host, port, id, password));   // Ryan: language-level migration
     }
 }
 
