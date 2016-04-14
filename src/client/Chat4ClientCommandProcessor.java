@@ -40,8 +40,7 @@ public class Chat4ClientCommandProcessor {
      * @param UI        ChatIF
      */
 
-    public Chat4ClientCommandProcessor(String id, String password, ObservableClient oc, ChatIF UI)
-            throws IOException {
+    public Chat4ClientCommandProcessor(String id, String password, ObservableClient oc, ChatIF UI) throws IOException {
         myUI = UI;
         myOC = oc;
         myId = id;
@@ -69,7 +68,7 @@ public class Chat4ClientCommandProcessor {
      *
      * @param message The message from the UI.
      */
-    public void handleMessageFromClientUI(String message) {
+    void handleMessageFromClientUI(String message) {
         if (message.charAt(0) != '#') {
             sendMessageToServer(message);
         } else {
