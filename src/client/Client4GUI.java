@@ -47,7 +47,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
             Font roboto = Font.createFont(TRUETYPE_FONT, (new FileInputStream("src/res/Roboto-Regular.ttf"))).deriveFont(12.0f);
             textField.setFont(roboto);
             textArea.setFont(roboto);
-            System.out.printf("Font is: "+roboto.getFamily()+" and size is "+ String.valueOf(roboto.getSize()));
+            System.out.printf("Font is: "+roboto.getFamily()+" and size is "+ String.valueOf(roboto.getSize())+'\n');
         } catch (FontFormatException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -81,7 +81,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     }
 
     public void actionPerformed(ActionEvent evt) {
-        System.out.printf("Action performed. Command is: "+evt.getActionCommand());
+        System.out.printf("Action performed. Event parameters: "+ evt.paramString());
         String message = textField.getText();
         client.handleMessageFromClientUI(message);
         textField.setText("");
