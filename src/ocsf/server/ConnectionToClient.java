@@ -134,7 +134,6 @@ public class ConnectionToClient extends Thread {
 
             throw ex;  // Rethrow the exception.
         }
-
         readyToStop = false;
         start(); // Start the thread waits for data from the socket
     }
@@ -155,7 +154,6 @@ public class ConnectionToClient extends Thread {
     public void sendToClient(Object msg) throws IOException {
         if (clientSocket == null || output == null)
             throw new SocketException("socket does not exist");
-
         output.writeObject(msg);
     }
 
@@ -230,27 +228,18 @@ public class ConnectionToClient extends Thread {
         try {
             // The message from the client
             Object msg;
-
             while (!readyToStop) {
                 // This block waits until it reads a message from the client
                 // and then sends it for handling by the server
 
                 try { // Added in version 2.31
-
                     // wait to receive an object
                     msg = input.readObject();
-
                     if (!readyToStop && handleMessageFromClient(msg)) // Added in version 2.2
-                    {
                         server.receiveMessageFromClient(msg, this);
-                    }
-
                 } catch (ClassNotFoundException ex) { // when an unknown class is received
-
                     server.clientException(this, ex);
-
                 } catch (RuntimeException ex) { // thrown by handleMessageFromClient or receiveMessageFromClient
-
                     server.clientException(this, ex);
                 }
             }
@@ -260,11 +249,9 @@ public class ConnectionToClient extends Thread {
                     closeAll();
                 } catch (Exception ex) {
                 }
-
                 server.clientException(this, exception);
             }
         } finally {
-
             server.clientDisconnected(this);   // moved here in version 2.31
         }
     }

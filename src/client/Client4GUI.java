@@ -156,9 +156,6 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         final String password = pswdStr;
         final int port = Integer.parseInt(portStr);
 
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI.
-
         javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI(host, port, id, password));   // Ryan: language-level migration
     }
 }

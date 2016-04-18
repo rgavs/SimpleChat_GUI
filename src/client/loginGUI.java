@@ -7,14 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-
-/**
- * Created by ryan on 4/13/16.
- */
 class loginGUI extends JPanel implements ActionListener, Observer {
     private final JTextField user;
     private final JPasswordField pass;
@@ -28,6 +25,7 @@ class loginGUI extends JPanel implements ActionListener, Observer {
 
     /**
      * Should <code>loginGUI</code> be abstracted to allow choosing <code>host</code> and <code>port</code>?
+     *
      * @param host String
      * @param port int
      */
@@ -37,6 +35,15 @@ class loginGUI extends JPanel implements ActionListener, Observer {
 
         // initialize text box              @author Ryan
         user = new JTextField(20);
+        user.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "transferFocus");
+
+        AbstractAction transferFocus = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                ((Component) e.getSource()).transferFocus();
+            }
+        };
+
+        user.getActionMap().put("transferFocus", transferFocus);
         // initialize chat text area
         pass = new JPasswordField(20);
         // initialize submit button
@@ -48,13 +55,14 @@ class loginGUI extends JPanel implements ActionListener, Observer {
             user.setFont(roboto.deriveFont(11.0f));
         } catch (FontFormatException e) {
             e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    private static void createAndShowLoginGUI(String host, int port){
+    private static void createAndShowLoginGUI(String host, int port) {
         //Create and set up the window.
         JFrame frame = new JFrame("ChatLogin");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,11 +81,27 @@ class loginGUI extends JPanel implements ActionListener, Observer {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        System.out.printf("Action performed. Command is: "+evt.getActionCommand());
+        System.out.printf("Action performed. Command is: " + evt.getActionCommand());
 
     }
 
-    public static void main(){
+    public static void main(String[] args) {
+        String hostStr, portStr;
+        try {
+            hostStr = args[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            hostStr = "localhost";
+        }
 
+        try {
+            portStr = args[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            portStr = "" + DEFAULT_PORT;
+        }
+
+        final String host = hostStr;
+        final int port = Integer.parseInt(portStr);
+
+        javax.swing.SwingUtilities.invokeLater(() -> createAndShowLoginGUI(host, port));   // Ryan: language-level migration
     }
 }

@@ -20,5 +20,4 @@ public class ServerStringMessageHandler extends ServerNonLoginHandler {
         getServer().getConsole().display(getClient().getInfo("id") + "> " + getMessage());
         getServer().sendToAllClients(getMessage(), (String) getClient().getInfo("channel"), (String) getClient().getInfo("id"));
     }
-
 }

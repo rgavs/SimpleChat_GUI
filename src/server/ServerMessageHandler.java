@@ -27,7 +27,7 @@ abstract class ServerMessageHandler implements Serializable {
      *
      * @param msg    The remainder string after handler has been stripped
      * @param server The server processing this handler
-     * @param client The Clientconnectionestablished for the client sending this message
+     * @param client The ConnectionToClient for the client sending this message
      */
     ServerMessageHandler(String msg, Chat4Server server, ConnectionToClient client) {
         message = msg;

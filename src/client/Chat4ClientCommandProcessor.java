@@ -34,10 +34,10 @@ public class Chat4ClientCommandProcessor {
     /**
      * Constructs an instance of the chat client.
      *
-     * @param id        string client's name
-     * @param password  string
-     * @param oc        ObservableClient
-     * @param UI        ChatIF
+     * @param id       string client's name
+     * @param password string
+     * @param oc       ObservableClient
+     * @param UI       ChatIF
      */
 
     public Chat4ClientCommandProcessor(String id, String password, ObservableClient oc, ChatIF UI) throws IOException {
