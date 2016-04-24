@@ -21,6 +21,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     private final JTextArea textArea;
     private final JButton editChannel;
     private final JButton listChannels;
+    private final JButton quit;
+    private final JButton setport;
+    private final JButton sethost;
     private final static String newline = "\n";
 
     /**
@@ -45,6 +48,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         editChannel = new JButton("EditChls");
         //initialize list channel button
          listChannels = new JButton("Channels");
+         quit = new JButton("Quit");
+         setport = new JButton("Setport");
+         sethost = new JButton("Sethost");
 
         try { // some customization
             Font roboto = Font.createFont(TRUETYPE_FONT, (new FileInputStream("src/res/Roboto-Regular.ttf"))).deriveFont(12.0f);
@@ -63,10 +69,16 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         editChannel.addActionListener(this);
         textField.addActionListener(this);
         listChannels.addActionListener(this);
+        quit.addActionListener(this);
+        setport.addActionListener(this);
+        sethost.addActionListener(this);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.NORTHWEST;
         add(editChannel);
         add(listChannels);
+        add(quit);
+        add(sethost);
+        add(setport);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridy = GridBagConstraints.PAGE_END;
@@ -97,6 +109,19 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         }
         else if(evt.getSource() == listChannels) {
         	client.handleMessageFromClientUI("#list");
+        }
+        else if(evt.getSource() == quit) {
+        	client.handleMessageFromClientUI("#quit");
+        }
+        else if(evt.getSource() == setport) {
+        	JFrame frame = new JFrame();
+        	Object port = JOptionPane.showInputDialog(frame, "Enter port number: ");
+        	client.handleMessageFromClientUI("#setport "+ port);
+        }
+        else if(evt.getSource() == sethost) {
+        	JFrame frame = new JFrame();
+        	Object host = JOptionPane.showInputDialog(frame, "Enter host name: ");
+        	client.handleMessageFromClientUI("#sethost "+ host);
         }
         else {
         String message = textField.getText();
