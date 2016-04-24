@@ -20,6 +20,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     private final JTextField textField;
     private final JTextArea textArea;
     private final JButton editChannel;
+    private final JButton listChannels;
     private final static String newline = "\n";
 
     /**
@@ -42,6 +43,8 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         textArea.setEditable(false);
         // initialize channel button
         editChannel = new JButton();
+        //initialize list channel button
+         listChannels = new JButton("Channels");
 
         try { // some customization
             Font roboto = Font.createFont(TRUETYPE_FONT, (new FileInputStream("src/res/Roboto-Regular.ttf"))).deriveFont(12.0f);
@@ -60,13 +63,16 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         editChannel.addActionListener(this);
         textField.addActionListener(this);
         GridBagConstraints c = new GridBagConstraints();
-        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridwidth = GridBagConstraints.NORTHWEST;
         add(editChannel);
+        add(listChannels);
 
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridy = GridBagConstraints.PAGE_END;
         add(textField, c);
 
         c.fill = GridBagConstraints.BOTH;
+        c.gridy = 1;
         c.weightx = 1.0;
         c.weighty = 1.0;
         add(scrollPane, c);
@@ -81,10 +87,21 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     }
 
     public void actionPerformed(ActionEvent evt) {
-        System.out.printf("Action performed. Command is: "+evt.getActionCommand());
+       System.out.println("Action performed. Command is: "+evt.getActionCommand());
+        if (evt.getSource() == editChannel) {
+        	//System.out.println("hey");
+        	JFrame frame = new JFrame();
+        	Object channel = JOptionPane.showInputDialog(frame, "Enter Channel name: ");
+        	client.handleMessageFromClientUI("#join " + channel);
+        }
+        else if(evt.getSource() == listChannels) {
+        	client.handleMessageFromClientUI("#list");
+        }
+        else {
         String message = textField.getText();
         client.handleMessageFromClientUI(message);
         textField.setText("");
+        }
     }
 
     public void update(Observable OC, Object msg) {
