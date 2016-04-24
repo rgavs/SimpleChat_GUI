@@ -15,6 +15,7 @@ public class sethost extends NotConnectedClientCommand {
 
     public void doCmd() {
         getClient().OC().setHost(getStr());
+        getClient().clientUI().display("Host is set to "+getStr());
     }
 
 }
