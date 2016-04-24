@@ -24,6 +24,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     private final JButton quit;
     private final JButton setport;
     private final JButton sethost;
+    private final JButton users;
     private final static String newline = "\n";
 
     /**
@@ -51,6 +52,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
          quit = new JButton("Quit");
          setport = new JButton("Setport");
          sethost = new JButton("Sethost");
+         users = new JButton("Users");
 
         try { // some customization
             Font roboto = Font.createFont(TRUETYPE_FONT, (new FileInputStream("src/res/Roboto-Regular.ttf"))).deriveFont(12.0f);
@@ -72,6 +74,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         quit.addActionListener(this);
         setport.addActionListener(this);
         sethost.addActionListener(this);
+        users.addActionListener(this);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.NORTHWEST;
         add(editChannel);
@@ -79,6 +82,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         add(quit);
         add(sethost);
         add(setport);
+        add(users);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridy = GridBagConstraints.PAGE_END;
@@ -122,6 +126,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         	JFrame frame = new JFrame();
         	Object host = JOptionPane.showInputDialog(frame, "Enter host name: ");
         	client.handleMessageFromClientUI("#sethost "+ host);
+        }
+        else if(evt.getSource() == users) {
+        	client.handleMessageFromClientUI("#users");
         }
         else {
         String message = textField.getText();
