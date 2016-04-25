@@ -14,11 +14,13 @@ public class join extends ClientCommand {
     }
 
     public void doCommand() {
+    	if (!getStr().equals("null")){
         try {
             String handlerMessage = "JoinChannel " + getStr();
             getClient().OC().sendToServer(handlerMessage);
         } catch (IOException ex) {
             getClient().clientUI().display(ex + "\nUnable to join " + getStr());
         }
+    }
     }
 }
