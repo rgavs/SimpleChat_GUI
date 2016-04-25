@@ -14,8 +14,9 @@ public class setport extends NotConnectedClientCommand {
     }
 
     public void doCmd() {
+    	if (!getStr().equals("null")){
         getClient().OC().setPort(Integer.parseInt(getStr()));
         getClient().clientUI().display("Port is set to "+getStr());
     }
-
+    }
 }
