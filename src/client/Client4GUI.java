@@ -46,7 +46,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         // initialize channel button
-        editChannel = new JButton("EditChls");
+        editChannel = new JButton();
+        Image plus = new ImageIcon("src/res/plus_sign.png").getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+        editChannel.setIcon(new ImageIcon(plus));
         //initialize list channel button
          listChannels = new JButton("Channels");
          quit = new JButton("Quit");
