@@ -192,7 +192,8 @@ public class Chat4Server extends AbstractServer {
         for (Thread aClientThreadList : clientThreadList) {
             try {
                 name = (String) ((ConnectionToClient) aClientThreadList).getInfo("channel");
-                id = (String) ((ConnectionToClient) aClientThreadList).getInfo("id");
+                //id = (String) ((ConnectionToClient) aClientThreadList).getInfo("id");
+                id = sender;
                 blocked = (HashSet<String>) ((ConnectionToClient) aClientThreadList).getInfo("iblock");
                 if (name.equals(channel) && !blocked.contains(sender)) {
                     ((ConnectionToClient) aClientThreadList).sendToClient(id + ">" + msg);
