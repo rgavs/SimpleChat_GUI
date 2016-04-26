@@ -111,7 +111,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         	//System.out.println("hey");
         	JFrame frame = new JFrame();
         	Object channel = JOptionPane.showInputDialog(frame, "Enter Channel name: ");
+        	if (channel != null){
         	client.handleMessageFromClientUI("#join " + channel);
+        	}
         }
         else if(evt.getSource() == listChannels) {
         	client.handleMessageFromClientUI("#list");
