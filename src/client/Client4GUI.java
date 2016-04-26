@@ -25,6 +25,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
     private final JButton setport;
     private final JButton sethost;
     private final JButton users;
+    private final JButton whisper; 
     private final static String newline = "\n";
 
     /**
@@ -46,15 +47,14 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         textArea = new JTextArea(5, 20);
         textArea.setEditable(false);
         // initialize channel button
-        editChannel = new JButton();
-        Image plus = new ImageIcon("src/res/plus_sign.png").getImage().getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-        editChannel.setIcon(new ImageIcon(plus));
+        editChannel = new JButton("EditChls");
         //initialize list channel button
          listChannels = new JButton("Channels");
          quit = new JButton("Quit");
          setport = new JButton("Setport");
          sethost = new JButton("Sethost");
          users = new JButton("Users");
+         whisper = new JButton("Whisper");
 
         try { // some customization
             Font roboto = Font.createFont(TRUETYPE_FONT, (new FileInputStream("src/res/Roboto-Regular.ttf"))).deriveFont(12.0f);
@@ -77,6 +77,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         setport.addActionListener(this);
         sethost.addActionListener(this);
         users.addActionListener(this);
+        whisper.addActionListener(this);
         GridBagConstraints c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.NORTHWEST;
         add(editChannel);
@@ -85,6 +86,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         add(sethost);
         add(setport);
         add(users);
+        add(whisper);
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridy = GridBagConstraints.PAGE_END;
@@ -114,6 +116,7 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         	if (channel != null){
         	client.handleMessageFromClientUI("#join " + channel);
         	}
+        	
         }
         else if(evt.getSource() == listChannels) {
         	client.handleMessageFromClientUI("#list");
@@ -133,6 +136,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         }
         else if(evt.getSource() == users) {
         	client.handleMessageFromClientUI("#users");
+        }
+        else if(evt.getSource() == whisper) {
+        	client.handleMessageFromClientUI("#whisper");
         }
         else {
         String message = textField.getText();
