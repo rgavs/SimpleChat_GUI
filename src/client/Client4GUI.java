@@ -140,6 +140,9 @@ public class Client4GUI extends JPanel implements ActionListener, ChatIF, Observ
         	client.handleMessageFromClientUI("#users");
         }
         else if(evt.getSource() == whisper) {
+            JFrame frame = new JFrame();
+        	String receiver = JOptionPane.showInputDialog(frame, "Enter receiver's ID: ");
+        	String msg = JOptionPane.showInputDialog(frame, "Message to "+ receiver+ " :");
         	client.handleMessageFromClientUI("#whisper");
         }
         else {
